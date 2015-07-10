@@ -74,6 +74,8 @@ static bool suspended = false;
 
 static struct workqueue_struct *workqueue;
 
+static struct workqueue_struct *workqueue;
+
 /* Trap into the TrustZone, and call funcs there. */
 static int __secure_tz_reset_entry2(unsigned int *scm_data, u32 size_scm_data,
 					bool is_64)
