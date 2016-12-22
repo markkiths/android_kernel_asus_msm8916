@@ -111,6 +111,10 @@ struct mmc_ext_csd {
 	u8			raw_bkops_status;	/* 246 */
 	u8			raw_sectors[4];		/* 212 - 4 bytes */
 	u8			health[3];		/* 267 - 3 bytes */
+	u8			pre_eol_info;		/* 268 */
+	u8			device_life_time_est_typ_a;	/* 269 */
+	u8			device_life_time_est_typ_b;	/* 270 */
+
 	unsigned int            feature_support;
 #define MMC_DISCARD_FEATURE	BIT(0)                  /* CMD38 feature */
 };
