@@ -352,6 +352,14 @@ out_free_inst:
 	goto out;
 }
 
+static void pcrypt_free(struct crypto_instance *inst)
+{
+	struct pcrypt_instance_ctx *ctx = crypto_instance_ctx(inst);
+
+	crypto_drop_spawn(&ctx->spawn);
+	kfree(inst);
+}
+
 static struct crypto_instance *pcrypt_alloc_aead(struct rtattr **tb,
 						 u32 type, u32 mask)
 {
@@ -384,6 +392,8 @@ static struct crypto_instance *pcrypt_alloc_aead(struct rtattr **tb,
 	inst->alg.cra_aead.decrypt = pcrypt_aead_decrypt;
 	inst->alg.cra_aead.givencrypt = pcrypt_aead_givencrypt;
 	inst->tmpl->free = pcrypt_free;
+
+	inst->free = pcrypt_free;
 
 out_put_alg:
 	crypto_mod_put(alg);
