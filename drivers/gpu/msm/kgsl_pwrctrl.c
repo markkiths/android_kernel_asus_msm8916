@@ -52,6 +52,7 @@
 
 #define DEFAULT_BUS_P 25
 #define DEFAULT_BUS_DIV (100 / DEFAULT_BUS_P)
+#define RELAXED_PARAM 1
 
 /*
  * The effective duration of qos request in usecs. After
@@ -397,8 +398,8 @@ static ssize_t kgsl_pwrctrl_thermal_pwrlevel_store(struct device *dev,
 
 	mutex_lock(&device->mutex);
 
-	if (level > pwr->num_pwrlevels - 2)
-		level = pwr->num_pwrlevels - 2;
+	if (level > pwr->num_pwrlevels - RELAXED_PARAM)
+		level = pwr->num_pwrlevels - RELAXED_PARAM;
 
 	pwr->thermal_pwrlevel = level;
 
@@ -486,8 +487,8 @@ static ssize_t kgsl_pwrctrl_min_pwrlevel_store(struct device *dev,
 		return ret;
 
 	mutex_lock(&device->mutex);
-	if (level > pwr->num_pwrlevels - 2)
-		level = pwr->num_pwrlevels - 2;
+	if (level > pwr->num_pwrlevels - RELAXED_PARAM)
+		level = pwr->num_pwrlevels - RELAXED_PARAM;
 
 	/* You can't set a minimum power level lower than the maximum */
 	if (level < pwr->max_pwrlevel)
@@ -955,7 +956,7 @@ static ssize_t kgsl_pwrctrl_default_pwrlevel_store(struct device *dev,
 	if (ret)
 		return ret;
 
-	if (level > pwr->num_pwrlevels - 2)
+	if (level > pwr->num_pwrlevels - RELAXED_PARAM)
 		goto done;
 
 	mutex_lock(&device->mutex);
