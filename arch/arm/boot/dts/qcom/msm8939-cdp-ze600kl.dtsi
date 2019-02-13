@@ -364,6 +364,17 @@
 
 		AUDIO_DEBUG = <&msm_gpio 95 0x00>; /*<asus-yusheng20150326+>*/
 	};
+
+        i2c@78ba000 { /* BLSP1 QUP6 */
+                nxp_tfa9887_amp@34 {
+                        compatible = "nxp,tfa9887-amp";
+                        reg = <0x34>;
+                };
+                nxp_tfa9887l_amp@35 {
+                        compatible = "nxp,tfa9887l-amp";
+                        reg = <0x35>;
+                };
+        };
 };
 
 &pm8916_gpios {

@@ -586,3 +586,15 @@ config SOUND_CONTROL_HAX_3_GPL
 	default y
 	help
  		Faux Sound Control v4.1, enhanced by Shoaib Anwar a.k.a Shoaib0597 and robcore.
+config AMP_TFA9887
+        tristate "NXP TFA9887 Speaker AMP Driver"
+        depends on I2C=y
+        help
+          NXP TFA9887 Speaker AMP Driver implemented by ASUS.
+
+config AMP_TFA9887L
+        tristate "NXP TFA9887L Speaker AMP Driver"
+        depends on I2C=y
+        help
+          NXP TFA9887L Speaker AMP Driver implemented by ASUS.
+
