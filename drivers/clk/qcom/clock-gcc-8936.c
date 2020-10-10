@@ -1149,6 +1149,7 @@ static struct clk_freq_tbl ftbl_gcc_camss_jpeg0_clk[] = {
 	F( 133330000,	   gpll0_out_main,   6,	  0,	0),
 	F( 266670000,	   gpll0_out_main,   3,	  0,	0),
 	F( 320000000,	   gpll0_out_main, 2.5,	  0,	0),
+	F( 400000000,	   gpll0_out_main,   2,	  0,	0),
 	F_END
 };
 
@@ -1162,7 +1163,7 @@ static struct rcg_clk jpeg0_clk_src = {
 		.dbg_name = "jpeg0_clk_src",
 		.ops = &clk_ops_rcg,
 		VDD_DIG_FMAX_MAP3(LOW, 133330000, NOMINAL, 266670000, HIGH,
-			320000000),
+			400000000),
 		CLK_INIT(jpeg0_clk_src.c),
 	},
 };
