@@ -1715,14 +1715,14 @@ static int qpnp_pon_probe(struct spmi_device *spmi)
 		dev_info(&pon->spmi->dev,
 			"PMIC@SID%d Power-on reason: Unknown and '%s' boot\n",
 			pon->spmi->sid, cold_boot ? "cold" : "warm");
-		ASUSEvtlog("Bootup Reason: Unknown and '%s' boot\n", cold_boot ? "cold" : "warm");
+		//ASUSEvtlog("Bootup Reason: Unknown and '%s' boot\n", cold_boot ? "cold" : "warm");
 	} else {
 		pon->pon_trigger_reason = index;
 		dev_info(&pon->spmi->dev,
 			"PMIC@SID%d Power-on reason: %s and '%s' boot\n",
 			pon->spmi->sid, qpnp_pon_reason[index],
 			cold_boot ? "cold" : "warm");
-		ASUSEvtlog("Bootup Reason: %s and '%s' boot\n", qpnp_pon_reason[index], cold_boot ? "cold" : "warm");
+		//ASUSEvtlog("Bootup Reason: %s and '%s' boot\n", qpnp_pon_reason[index], cold_boot ? "cold" : "warm");
 	}
 
 	/* POFF reason */
