@@ -1498,9 +1498,17 @@ static int msm_otg_reset(struct usb_phy *phy)
 	}
 	motg->reset_counter++;
 
+	disable_irq(motg->irq);
+	if (motg->phy_irq)
+		disable_irq(motg->phy_irq);
+
 	ret = msm_otg_phy_reset(motg);
 	if (ret) {
 		dev_err(phy->dev, "phy_reset failed\n");
+		if (motg->phy_irq)
+			enable_irq(motg->phy_irq);
+
+		enable_irq(motg->irq);
 		return ret;
 	}
 
@@ -1552,6 +1560,9 @@ static int msm_otg_reset(struct usb_phy *phy)
 		writel_relaxed(readl_relaxed(USB_OTGSC) & ~(OTGSC_IDPU),
 								USB_OTGSC);
 
+	if (motg->phy_irq)
+		enable_irq(motg->phy_irq);
+	enable_irq(motg->irq);
 	msm_otg_dbg_log_event(&motg->phy, "USB RESET DONE", phy->state,
 			get_pm_runtime_counter(phy->dev));
 	return 0;
@@ -2117,6 +2128,8 @@ static int msm_otg_suspend(struct msm_otg *motg)
 
 	motg->ui_enabled = 0;
 	disable_irq(motg->irq);
+	if (motg->phy_irq)
+		disable_irq(motg->phy_irq);
 lpm_start:
 	host_bus_suspend = !test_bit(MHL, &motg->inputs) && phy->otg->host &&
 		!test_bit(ID, &motg->inputs);
@@ -2158,6 +2171,8 @@ lpm_start:
 			motg->pm_done = 1;
 		motg->ui_enabled = 1;
 		enable_irq(motg->irq);
+                if (motg->phy_irq)
+                        enable_irq(motg->phy_irq);
 //ASUS_BSP+++ Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
 		mutex_unlock(&msm_otg_mutex);
 //ASUS_BSP--- Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
@@ -2408,6 +2423,8 @@ phcd_retry:
 	/* Enable ASYNC IRQ (if present) during LPM */
 	if (motg->async_irq)
 		enable_irq(motg->async_irq);
+	if (motg->phy_irq)
+		enable_irq(motg->phy_irq);
 
 	/* XO shutdown during idle , non wakeable irqs must be disabled */
 	if (device_bus_suspend || host_bus_suspend || !motg->async_irq) {
@@ -2429,9 +2446,13 @@ phcd_retry:
 phy_suspend_fail:
 	motg->ui_enabled = 1;
 	enable_irq(motg->irq);
+        if (motg->phy_irq)
+                enable_irq(motg->phy_irq);
 //ASUS_BSP+++ Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
         mutex_unlock(&msm_otg_mutex);
 //ASUS_BSP--- Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
+	if (motg->phy_irq)
+		enable_irq(motg->phy_irq);
 	return ret;
 }
 
