@@ -9,25 +9,28 @@ red='\033[0;31m'
 nocol='\033[0m'
 
 # Kernel details
-KERNEL_NAME="FireKernel"
-VERSION="r3.2"
+KERNEL_NAME="revolt"
+VERSION="A11"
 DATE=$(date +"%d-%m-%Y-%I-%M")
 DEVICE="Z00T"
 FINAL_ZIP=$KERNEL_NAME-$VERSION-$DATE-$DEVICE.zip
 defconfig=Z00T_defconfig
 
 # Dirs
-BASE_DIR=/media/hdd/aayush/kernel
-KERNEL_DIR=$BASE_DIR/msm8916
+KERNEL_DIR=$(pwd)
 ANYKERNEL_DIR=$KERNEL_DIR/AnyKernel3
 KERNEL_IMG=$KERNEL_DIR/arch/arm64/boot/Image.gz-dtb
-UPLOAD_DIR=$BASE_DIR/$DEVICE
+UPLOAD_DIR=$KERNEL_DIR/$DEVICE
 
 # Export
 export ARCH=arm64
-export CROSS_COMPILE=/media/hdd/aayush/kernel/aarch64-elf-gcc/bin/aarch64-elf-
+export CROSS_COMPILE=$KERNEL_DIR/aarch64-elf-gcc/bin/aarch64-elf-
 
-# Toolchain Used: https://developer.arm.com/open-source/gnu-toolchain/gnu-a/downloads
+# Toolchain Used: https://github.com/kdrag0n/aarch64-elf-gcc
+## Functions ##
+# Clone
+# Toolchain
+git clone https://github.com/kdrag0n/aarch64-elf-gcc
 
 ## Functions ##
 

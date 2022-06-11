@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=FireKernel by theimpulson @ xda-developers
+kernel.string=revolt based on FireKernel by theimpulson @ xda-developers
 do.devicecheck=0
 do.modules=0
 do.cleanup=1
