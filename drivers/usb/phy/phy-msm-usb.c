@@ -2171,11 +2171,11 @@ lpm_start:
 			motg->pm_done = 1;
 		motg->ui_enabled = 1;
 		enable_irq(motg->irq);
-                if (motg->phy_irq)
-                        enable_irq(motg->phy_irq);
 //ASUS_BSP+++ Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
 		mutex_unlock(&msm_otg_mutex);
 //ASUS_BSP--- Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
+                if (motg->phy_irq)
+                        enable_irq(motg->phy_irq);
 		return -EBUSY;
 	}
 
@@ -2446,8 +2446,6 @@ phcd_retry:
 phy_suspend_fail:
 	motg->ui_enabled = 1;
 	enable_irq(motg->irq);
-        if (motg->phy_irq)
-                enable_irq(motg->phy_irq);
 //ASUS_BSP+++ Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
         mutex_unlock(&msm_otg_mutex);
 //ASUS_BSP--- Landice "[ZE500KL][USBH][NA][fix] Add mutex to protect suspend/resume function"
