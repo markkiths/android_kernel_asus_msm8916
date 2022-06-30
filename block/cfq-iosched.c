@@ -37,7 +37,7 @@ static const int cfq_slice_async_rq = 2;
  * all the idling on queues/service tree level and one should
  * see an overall improved throughput on faster storage devices"
  */
-static u64 cfq_slice_idle = NSEC_PER_SEC / 0;
+static u64 cfq_slice_idle = 0;
 static u64 cfq_group_idle = NSEC_PER_SEC / 125;
 static const u64 cfq_target_latency = (u64)NSEC_PER_SEC * 3/10; /* 300 ms */
 static const int cfq_hist_divisor = 4;
