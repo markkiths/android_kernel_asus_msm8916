@@ -10,7 +10,7 @@ nocol='\033[0m'
 
 # Kernel details
 KERNEL_NAME="revolt"
-VERSION="A11"
+VERSION="QR"
 DATE=$(date +"%d-%m-%Y-%I-%M")
 DEVICE="Z00L"
 FINAL_ZIP=$KERNEL_NAME-$VERSION-$DATE-$DEVICE.zip
@@ -26,11 +26,11 @@ UPLOAD_DIR=$KERNEL_DIR/$DEVICE
 export ARCH=arm64
 export CROSS_COMPILE=$KERNEL_DIR/aarch64-elf-gcc/bin/aarch64-elf-
 
-# Toolchain Used: https://github.com/kdrag0n/aarch64-elf-gcc
+# Toolchain Used: https://github.com/javashin/arm64-gcc-11
 ## Functions ##
 # Clone
 # Toolchain
-git clone https://github.com/kdrag0n/aarch64-elf-gcc
+git clone https://github.com/javashin/arm64-gcc-11 aarch64-elf-gcc
 
 ## Functions ##
 
