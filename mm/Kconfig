@@ -636,3 +636,6 @@ config ZBUD
 	  page.  While this design limits storage density, it has simple and
 	  deterministic reclaim properties that make it preferable to a higher
 	  density approach when reclaim will be used.
+
+config MEMFD_CREATE
+	bool "Enable memfd_create() system call" if EXPERT
