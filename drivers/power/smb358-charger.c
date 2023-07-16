@@ -748,7 +748,7 @@ void ChargerRegDump(char tempString[], int length)
 	BAT_DBG("Enter %s!", __func__);
 	for (i = 0; i < ARRAY_SIZE(ChargerReg_CMD_Table); i++) {
 		Charger_reg_value = ChargerReg_proc_read_By_Table(i);
-		snprintf(tempString, length, "%s%02x", tempString, Charger_reg_value);
+		scnprintf(tempString, length, "%s%02x", tempString, Charger_reg_value);
 	}
 }
 
@@ -3073,7 +3073,7 @@ static int asus_print_all(void)
 		batt_info.capacity,
 		batt_info.voltage_now,
 		batt_info.current_now);
-	snprintf(battInfo, sizeof(battInfo), "%sTemp:%s%d.%dC, Cable:%d(%s), Status:%s, Charging:%s, Rsoc:%d, BATID:%lld, TLevel:%d, ",
+	scnprintf(battInfo, sizeof(battInfo), "%sTemp:%s%d.%dC, Cable:%d(%s), Status:%s, Charging:%s, Rsoc:%d, BATID:%lld, TLevel:%d, ",
 		battInfo,
 		batt_info.temperature_negative_sign,
 		batt_info.temperature10,
@@ -3085,7 +3085,7 @@ static int asus_print_all(void)
 		batt_info.Rsoc,
 		battID,
 		Thermal_Level);
-	snprintf(battInfo, sizeof(battInfo), "%sReg:%s\n",
+	scnprintf(battInfo, sizeof(battInfo), "%sReg:%s\n",
 		battInfo,
 		chargerReg);
 	BAT_DBG("%s", battInfo);
@@ -3669,7 +3669,7 @@ static int ChargerRegDump_read_proc(struct seq_file *buf, void *v)
 	char tempString[512] = "";
 	for (i = 0; i < ARRAY_SIZE(ChargerReg_CMD_Table); i++) {
 		Charger_reg_value = ChargerReg_proc_read_By_Table(i);
-		snprintf(tempString, sizeof(tempString), "%s0x%02x=%d%d%d%d%d%d%d%d\n", tempString, ChargerReg_CMD_Table[i].addr, BYTETOBINARY(Charger_reg_value));
+		scnprintf(tempString, sizeof(tempString), "%s0x%02x=%d%d%d%d%d%d%d%d\n", tempString, ChargerReg_CMD_Table[i].addr, BYTETOBINARY(Charger_reg_value));
 	}
 	return seq_printf(buf, "%s", tempString);
 }
