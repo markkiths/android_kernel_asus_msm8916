@@ -5805,8 +5805,7 @@ static void __setscheduler(struct rq *rq, struct task_struct *p,
 	if (policy == -1) /* setparam */
 		policy = p->policy;
 
-	/* Replace SCHED_FIFO with SCHED_RR to reduce latency */
-	p->policy = policy == SCHED_FIFO ? SCHED_RR : policy;
+	p->policy = policy;
 
 	if (fair_policy(policy))
 		p->static_prio = NICE_TO_PRIO(attr->sched_nice);
