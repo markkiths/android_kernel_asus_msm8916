@@ -9,25 +9,28 @@ red='\033[0;31m'
 nocol='\033[0m'
 
 # Kernel details
-KERNEL_NAME="FireKernel"
-VERSION="r3.2"
+KERNEL_NAME="oblivion"
+VERSION="android10"
 DATE=$(date +"%d-%m-%Y-%I-%M")
 DEVICE="Z00L"
 FINAL_ZIP=$KERNEL_NAME-$VERSION-$DATE-$DEVICE.zip
 defconfig=Z00L_defconfig
 
 # Dirs
-BASE_DIR=/media/hdd/aayush/kernel
-KERNEL_DIR=$BASE_DIR/msm8916
+KERNEL_DIR=$(pwd)
 ANYKERNEL_DIR=$KERNEL_DIR/AnyKernel3
 KERNEL_IMG=$KERNEL_DIR/arch/arm64/boot/Image.gz-dtb
-UPLOAD_DIR=$BASE_DIR/$DEVICE
+UPLOAD_DIR=$KERNEL_DIR/$DEVICE
 
 # Export
 export ARCH=arm64
-export CROSS_COMPILE=/media/hdd/aayush/kernel/aarch64-elf-gcc/bin/aarch64-elf-
+export CROSS_COMPILE=$(pwd)/aarch64-elf-gcc/bin/aarch64-elf-
 
-# Toolchain Used: https://developer.arm.com/open-source/gnu-toolchain/gnu-a/downloads
+# Toolchain Used: https://github.com/javashin/arm64-gcc-11
+## Functions ##
+# Clone
+# Toolchain
+git clone https://github.com/javashin/arm64-gcc-11 $(pwd)/aarch64-elf-gcc
 
 ## Functions ##
 
@@ -60,7 +63,7 @@ mv $ANYKERNEL_DIR/UPDATE-AnyKernel2.zip $UPLOAD_DIR/$FINAL_ZIP
 # Options
 function options() {
 echo -e "$cyan***********************************************"
-  echo "          Compiling FireKernel kernel          "
+  echo "          Compiling oblivion kernel          "
   echo -e "***********************************************$nocol"
   echo -e " "
   echo -e " Select one of the following types of build : "
